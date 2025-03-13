@@ -54,3 +54,4 @@ atributo = input("Escolha um atributo para comparar: ")
 
 # Comparação das cartas
 comparar_cartas(carta1, carta2, atributo)
+
