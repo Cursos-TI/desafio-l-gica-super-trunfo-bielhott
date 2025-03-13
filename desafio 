@@ -1,0 +1,56 @@
+def cadastrar_carta():
+    """Função para cadastrar uma carta de cidade."""
+    print("\nCadastre uma nova carta:")
+    estado = input("Estado: ")
+    codigo = input("Código da carta: ")
+    nome = input("Nome da cidade: ")
+    populacao = int(input("População: "))
+    area = float(input("Área (km²): "))
+    pib = float(input("PIB (em milhões): "))
+    pontos_turisticos = int(input("Número de pontos turísticos: "))
+    
+    # Cálculo da densidade populacional
+    densidade_populacional = populacao / area
+    
+    return {
+        "estado": estado,
+        "codigo": codigo,
+        "nome": nome,
+        "população": populacao,
+        "área": area,
+        "PIB": pib,
+        "pontos turísticos": pontos_turisticos,
+        "densidade populacional": densidade_populacional
+    }
+
+def comparar_cartas(carta1, carta2, atributo):
+    """Compara duas cartas com base no atributo escolhido."""
+    if atributo not in carta1 or atributo not in carta2:
+        print("Atributo inválido!")
+        return
+    
+    print(f"\nComparando pelo atributo: {atributo}")
+    
+    valor1 = carta1[atributo]
+    valor2 = carta2[atributo]
+    
+    if atributo == "densidade populacional":  # Menor valor vence
+        vencedor = carta1 if valor1 < valor2 else carta2
+    else:  # Maior valor vence
+        vencedor = carta1 if valor1 > valor2 else carta2
+    
+    if valor1 == valor2:
+        print("Empate!")
+    else:
+        print(f"Carta vencedora: {vencedor['nome']} ({atributo}: {vencedor[atributo]})")
+
+# Cadastro das cartas
+carta1 = cadastrar_carta()
+carta2 = cadastrar_carta()
+
+# Escolha do atributo para comparar
+print("\nAtributos disponíveis: população, área, PIB, pontos turísticos, densidade populacional")
+atributo = input("Escolha um atributo para comparar: ")
+
+# Comparação das cartas
+comparar_cartas(carta1, carta2, atributo)
